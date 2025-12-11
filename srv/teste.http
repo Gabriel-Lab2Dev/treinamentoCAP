@@ -1,0 +1,22 @@
+
+# POST http://localhost:4004/odata/v4/catalog/Developers
+# Content-Type: application/json
+
+# {
+#   "name": "Mojang",
+#   "creationYear": 2009
+# }
+
+
+# GET http://localhost:4004/odata/v4/catalog/Developers
+
+
+
+# PATCH http://localhost:4004/odata/v4/catalog/Developers/1656476d-8505-4475-b2a1-e9b96b8e98e3
+# Content-Type: application/json
+
+# {
+#   "creationYear": 2010
+# }
+
+#  DELETE http://localhost:4004/odata/v4/catalog/Developers/1656476d-8505-4475-b2a1-e9b96b8e98e3

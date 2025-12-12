@@ -39,8 +39,7 @@ Content-Type: application/json
 {
   "titulo": "atv1",
   "descricao": "Atividade Numero 1",
-  "concluida": 1,
-  "data_criacao": "2025-12-10"
+  "concluida": 0
 }
 
 
@@ -63,9 +62,9 @@ Content-Type: application/json
 
 
 {
-  "name": "Gabriel Souza",
-  "email": "gabriel.souza@exemplo.com",
-  "password": "banana"
+  "name": "Felipe Dias",
+  "email": "FelipeDias@exemplo.com",
+  "password": "maca"
 }
 
 

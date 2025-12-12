@@ -1,6 +1,6 @@
 namespace com.lab2dev.gameshop.db;
 
-using { cuid } from '@sap/cds/common';
+using { cuid,managed } from '@sap/cds/common';
 
 entity Games: cuid {
     title: String;
@@ -17,11 +17,10 @@ entity Developers: cuid {
         on games.developer = $self;
 };
 
-entity TaskService: cuid {
+entity TaskService: cuid,managed {
     titulo:String;
     descricao: String;
     concluida: Integer;
-    data_criacao: String
 };
 
 entity Users: cuid {

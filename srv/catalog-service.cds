@@ -8,4 +8,6 @@ service CatalogService {
     entity Games as projection on db.Games;
 
     entity TaskService as projection on db.TaskService;
+
+    entity Users as projection on db.Users;
 }

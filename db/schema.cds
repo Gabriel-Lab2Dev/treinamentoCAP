@@ -23,3 +23,9 @@ entity TaskService: cuid {
     concluida: Integer;
     data_criacao: String
 };
+
+entity Users: cuid {
+    name:String;
+    email: String;
+    password: String
+};

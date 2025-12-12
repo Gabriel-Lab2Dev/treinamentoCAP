@@ -28,6 +28,8 @@
 
 # ATV2
 
+
+//TASKS
 GET  http://localhost:4004/odata/v4/catalog/TaskService
 
 POST http://localhost:4004/odata/v4/catalog/TaskService
@@ -50,3 +52,28 @@ Content-Type: application/json
 }
 
 DELETE http://localhost:4004/odata/v4/catalog/TaskService/26279a39-d084-4509-a7c0-a320d81408bf
+
+
+//USERS
+
+GET  http://localhost:4004/odata/v4/catalog/Users
+
+POST http://localhost:4004/odata/v4/catalog/Users
+Content-Type: application/json
+
+
+{
+  "name": "Gabriel Souza",
+  "email": "gabriel.souza@exemplo.com",
+  "password": "banana"
+}
+
+
+PATCH http://localhost:4004/odata/v4/catalog/Users/c936aa17-9b83-4dac-985e-a074e0c42299
+Content-Type: application/json
+
+{
+  "password": "maca"
+}
+
+DELETE http://localhost:4004/odata/v4/catalog/Users/c936aa17-9b83-4dac-985e-a074e0c42299

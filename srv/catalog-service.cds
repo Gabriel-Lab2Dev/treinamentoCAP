@@ -17,5 +17,18 @@ service CatalogService {
     entity GamesName as select ID, title, developer.name as developer_name from Games
 
     @readonly
-    entity TaskService as projection on db.TaskService;
+    entity Tasks as projection on db.Tasks;
+
+    @readonly
+    entity Users as projection on db.Users;
+
+    @readonly
+    entity TasksConcluida as select ID,createdAt,createdBy,modifiedAt,modifiedBy,titulo,descricao,concluida from Tasks where concluida = 1;
+
+    @readonly
+    entity TasksNaoConcluida as select ID,createdAt,createdBy,modifiedAt,modifiedBy,titulo,descricao,concluida from Tasks where concluida = 0;
+
+    @readonly
+    entity userWithoutTask as select ID,name as tasks_ID from Users where tasks.ID is NULL ;
+
 }

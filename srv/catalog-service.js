@@ -34,6 +34,7 @@ class CatalogService extends cds.ApplicationService {
         developer_ID: game.developer_ID,
       };
     });
+
     this.on("getGamesStock", async (req) => {
       const { stock } = req.data; // vem da query
       const { Games } = cds.entities;
@@ -48,6 +49,33 @@ class CatalogService extends cds.ApplicationService {
 
       return games;
     });
+
+    this.on("newTask", async (req) => {
+      const { titulo, descricao, concluida, user_ID } = req.data;
+      const { Tasks } = cds.entities;
+
+      if (!titulo) {
+        req.reject(400, "Título é obrigatório");
+      }
+
+      if (concluida !== 0 && concluida !== 1) {
+        req.reject(400, "status de conclusão inválido");
+      }
+
+      if (!user_ID) {
+        req.reject(400, "Usuário Inválido");
+      }
+
+      const newTask = await INSERT.into(Tasks).entries({
+        titulo,
+        descricao,
+        concluida,
+        user_ID,
+      });
+
+      return await SELECT.one.from(Tasks).where({ ID: newTask.ID });
+    });
+
     return super.init();
   }
 }

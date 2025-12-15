@@ -1,0 +1,6 @@
+POST http://localhost:4004/catalog/newTask
+Content-Type: application/json
+
+{
+    
+}

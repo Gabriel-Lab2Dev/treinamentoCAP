@@ -1,4 +1,5 @@
 const cds = require("@sap/cds");
+const { SELECT } = require("@sap/cds/lib/ql/cds-ql");
 
 class CatalogService extends cds.ApplicationService {
   async init() {
@@ -73,7 +74,44 @@ class CatalogService extends cds.ApplicationService {
         user_ID,
       });
 
-      return await SELECT.one.from(Tasks).where({ ID: newTask.ID });
+      const createdTask = await SELECT.one
+        .from(Tasks)
+        .where({ titulo: titulo });
+
+      return createdTask;
+    });
+
+    this.on("modifyTask", async (req) => {
+      const { Tasks } = cds.entities;
+
+      const { ID, titulo, descricao, concluida, user_ID } = req.data;
+      let fieldsUpdate = [
+        ["titulo", titulo],
+        ["descricao", descricao],
+        ["concluida", concluida],
+        ["user_ID", user_ID],
+      ];
+
+      fieldsUpdate = Object.fromEntries(
+        fieldsUpdate.filter(([_, value]) => value)
+      );
+
+      await UPDATE(Tasks).set(fieldsUpdate).where({ ID });
+
+      return { ID: ID, fieldsUpdate };
+    });
+
+    this.on("listUserTask", async (req) => {
+      const { userID } = req.data;
+      const { Tasks } = cds.entities;
+
+      if (!userID) {
+        req.reject(400, "Parâmetro 'user_ID' inválido");
+      }
+
+      const tasks = await SELECT.from(Tasks).where({ user_ID: userID,concluida:0 });
+
+      return tasks;
     });
 
     return super.init();

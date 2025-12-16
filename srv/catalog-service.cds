@@ -28,8 +28,20 @@ service CatalogService {
     action   stockRemoval(id : UUID, amount : Integer)  returns Games;
     function getGamesStock(stock : Integer @mandatory ) returns array of Games;
 
-    action   newTask(titulo : String,
-                     descricao : String,
-                     concluida : Integer,
-                     user : UUID) returns Tasks;
+    action newTask(
+        titulo : String,
+        descricao : String,
+        concluida : Integer,
+        user_ID : UUID)                    
+        returns Tasks;
+
+    action modifyTask(
+        ID : UUID,
+        titulo : String,
+        descricao : String,
+        concluida : Integer,
+        user_ID : UUID
+        ) returns Tasks
+
+    function listUserTask(userID: UUID) returns array of Tasks
 }

@@ -17,7 +17,7 @@ entity Developers: cuid {
         on games.developer = $self;
 };
 
-entity Tasks: cuid,managed {
+entity Tasks:  cuid, managed {
     titulo:String;
     descricao: String;
     concluida: Integer;

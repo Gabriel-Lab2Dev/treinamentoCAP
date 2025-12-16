@@ -1,14 +1,32 @@
-POST http://localhost:4004/catalog/modifyTask
-Content-Type: application/json
+
+//FILTER
+GET http://localhost:4004/catalog/Tasks?$filter=titulo eq 'atv2'
+
+# ORDER BY
+
+GET http://localhost:4004/catalog/Tasks?$orderby=titulo desc
 
 
-{
-  "ID": "19000254-263d-4bd2-ad5f-15d65a564253",
-  "titulo": "atv7",
-  "descricao": "Atividade Numero 7"
-}
+# COUNT
 
-GET http://localhost:4004/catalog/Tasks
+GET http://localhost:4004/catalog/Tasks?$count=true
 
 
-GET http://localhost:4004/catalog/listUserTask?userID=2287733e-f9c2-4f3d-acd1-194b69409d4b
+# TOP and SKIP
+
+GET http://localhost:4004/catalog/Tasks?$count=true&$top=2&$skip=1
+
+
+# EXPAND
+
+GET http://localhost:4004/catalog/Tasks?$expand=user
+
+
+# SELECT
+
+GET http://localhost:4004/catalog/Tasks?$select=titulo,descricao
+
+
+# SELECT with EXPAND
+
+GET http://localhost:4004/catalog/Tasks?$expand=user($select=name,email)

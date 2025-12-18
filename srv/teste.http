@@ -1,9 +1,0 @@
-POST http://localhost:4004/catalog/stockRemoval
-Content-Type: application/json
-
-{
-  "id": "26e8e777-f963-401c-b9e6-9bef42318ea4",
-  "amount": 86
-}
-
-GET http://localhost:4004/catalog/getGamesStock?stock=100

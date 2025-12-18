@@ -5,13 +5,10 @@ using {com.lab2dev.gameshop.db as db} from '../db/schema';
 
 service CatalogService {
 
-    @readonly
     entity Developers as projection on db.Developers;
 
-    @readonly
     entity Games      as projection on db.Games;
 
-    @readonly
     entity GamesName  as
         select
             ID,
@@ -19,10 +16,10 @@ service CatalogService {
             developer.name as developer_name
         from Games
 
-    @readonly
+
     entity Tasks      as projection on db.Tasks;
 
-    @readonly
+
     entity Users      as projection on db.Users;
 
     action   stockRemoval(id : UUID, amount : Integer)  returns Games;

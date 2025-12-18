@@ -9,7 +9,7 @@ service CatalogService {
     entity Developers as projection on db.Developers;
 
     @readonly
-    entity Games as projection on db.Games;
+    entity Games      as projection on db.Games;
 
     @readonly
     entity GamesName  as
@@ -42,11 +42,6 @@ service CatalogService {
         concluida : Integer,
         user_ID : UUID
         ) returns Tasks
-
-
-
-    action   updateStock(id : UUID, newStock : Integer)  returns Games;
-    function getGames() returns array of Games;
 
     function listUserTask(userID: UUID) returns array of Tasks
 }

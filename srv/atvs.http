@@ -1,3 +1,6 @@
+GET http://localhost:4004/catalog/Games?ID=26e8e777-f963-401c-b9e6-9bef42318ea4
+
+
 POST http://localhost:4004/catalog/Games
 Content-Type: application/json
 
@@ -10,3 +13,13 @@ Content-Type: application/json
     "ID": "a0c5e580-6c62-47e6-bc46-9d0e7d4948e6"
   }
 }
+
+
+PATCH http://localhost:4004/catalog/Games(26e8e777-f963-401c-b9e6-9bef42318ea4)
+Content-Type: application/json
+
+{
+  "title": "Game7"
+}
+
+DELETE http://localhost:4004/catalog/Developers(53491deb-4db2-471b-be58-1b0f6a6f04bc)

@@ -1,5 +1,6 @@
 const cds = require("@sap/cds");
 const { SELECT } = require("@sap/cds/lib/ql/cds-ql");
+const { executeHttpRequest } = require("@sap-cloud-sdk/http-client");
 
 class CatalogService extends cds.ApplicationService {
   async init() {
@@ -45,7 +46,7 @@ class CatalogService extends cds.ApplicationService {
     // });
 
     this.before("UPDATE", "Games", (req) => {
-      console.log("BANANA")
+      console.log("BANANA");
     });
 
     this.after("UPDATE", "Games", (results, req) => {
@@ -53,7 +54,7 @@ class CatalogService extends cds.ApplicationService {
     });
 
     this.before("UPSERT", "Games", (req) => {
-      console.log(req.data)
+      console.log(req.data);
     });
 
     this.after("UPSERT", "Games", (results, req) => {
@@ -62,7 +63,7 @@ class CatalogService extends cds.ApplicationService {
     });
 
     this.before("DELETE", "Games", (event) => {
-      console.log(event.data)
+      console.log(event.data);
     });
 
     this.after("DELETE", "Games", (results, req) => {
@@ -74,9 +75,9 @@ class CatalogService extends cds.ApplicationService {
       const existingDev = await SELECT.one
         .from(GamesEntity)
         .where({ developer_ID: event.data.ID });
-        if(existingDev){
-          return event.error(400, "Desenvolvedor está atrelado a um Game");
-        }
+      if (existingDev) {
+        return event.error(400, "Desenvolvedor está atrelado a um Game");
+      }
     });
 
     //ATV2
@@ -90,7 +91,7 @@ class CatalogService extends cds.ApplicationService {
     // });
 
     this.before("UPDATE", "Tasks", (req) => {
-      console.log("BANANA")
+      console.log("BANANA");
     });
 
     this.after("UPDATE", "Tasks", (results, req) => {
@@ -98,7 +99,7 @@ class CatalogService extends cds.ApplicationService {
     });
 
     this.before("UPSERT", "Tasks", (req) => {
-      console.log(req.data)
+      console.log(req.data);
     });
 
     this.after("UPSERT", "Tasks", (results, req) => {
@@ -107,12 +108,34 @@ class CatalogService extends cds.ApplicationService {
     });
 
     this.before("DELETE", "Tasks", (event) => {
-      console.log(event.data)
+      console.log(event.data);
     });
 
     this.after("DELETE", "Tasks", (results, req) => {
       console.log(req.data);
       console.log(results);
+    });
+
+    // FUNCTION: getFreeGames() MODULO 6
+    this.on("getFreeGames", async (req) => {
+      try {
+        const resp = await executeHttpRequest(
+          { destinationName: "FREE_TO_GAME_API" }, // destination lookup pelo nome :contentReference[oaicite:1]{index=1}
+          {
+            method: "GET",
+            url: "/games",
+          }
+        );
+
+        const data = Array.isArray(resp.data) ? resp.data : [];
+        return data.map((g) => ({
+          title: g.title ?? null,
+          genre: g.genre ?? null,
+          developer: g.developer ?? null,
+        }));
+      } catch (e) {
+        req.reject(500, `Erro ao buscar free games: ${e.message}`);
+      }
     });
 
     return super.init();
